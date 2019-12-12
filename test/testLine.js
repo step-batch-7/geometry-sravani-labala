@@ -1,11 +1,37 @@
+"use strict";
+
 const assert = require("assert");
 const Line = require("./../src/line.js");
 
 describe("line", function() {
   describe("toString", function() {
-    it("should give 'working' to indicate the class is working", function() {
-      let line = new Line(1, 2, 3, 4);
+    it("should give the points of the line ", function() {
+      const endA = [1, 2];
+      const endB = [3, 4];
+      const line = new Line(endA, endB);
       assert.strictEqual(line.toString(), "Line (1,2) (3,4)");
+    });
+  });
+
+  describe("isEqualTo", function() {
+    it("should give true if both lines are equal", function() {
+      const endA = [1, 2];
+      const endB = [3, 4];
+      const line = new Line(endA, endB);
+      const otherLineEndA = [1, 2];
+      const otherLineEndB = [3, 4];
+      const otherLine = new Line(otherLineEndA, otherLineEndB);
+      assert.strictEqual(line.isEqualTo(otherLine), true);
+    });
+
+    it("should give false if both lines are not equal", function() {
+      const endA = [1, 2];
+      const endB = [3, 4];
+      const line = new Line(endA, endB);
+      const otherLineEndA = [1, 2];
+      const otherLineEndB = [3, 3];
+      const otherLine = new Line(otherLineEndA, otherLineEndB);
+      assert.strictEqual(line.isEqualTo(otherLine), false);
     });
   });
 });
