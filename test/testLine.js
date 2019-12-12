@@ -33,5 +33,13 @@ describe("line", function() {
       const otherLine = new Line(otherLineEndA, otherLineEndB);
       assert.strictEqual(line.isEqualTo(otherLine), false);
     });
+
+    it("should give false if the type of other line doesn't belongs to the class Line", function() {
+      const endA = [1, 2];
+      const endB = [3, 4];
+      const line = new Line(endA, endB);
+      const otherLine = { endA: { x: 1, y: 2 }, endB: { x: 3, y: 4 } };
+      assert.strictEqual(line.isEqualTo(otherLine), false);
+    });
   });
 });

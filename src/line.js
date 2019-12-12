@@ -15,9 +15,10 @@ class Line {
   }
 
   isEqualTo(otherLine) {
+    const instanceOfOtherLine = otherLine instanceof Line;
     const checkEndA = arePointsEqual(this.endA, otherLine.endA);
     const checkEndB = arePointsEqual(this.endB, otherLine.endB);
-    return checkEndA && checkEndB;
+    return checkEndA && checkEndB && instanceOfOtherLine;
   }
 }
 
