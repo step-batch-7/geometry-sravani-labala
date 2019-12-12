@@ -8,9 +8,8 @@ class Line {
   toString() {
     return "working";
   }
-  isEqualTo(x1, y1, x2, y2) {
-    //  let line = new Line(x1, y1, x2, y2);
-    return new Line(x1, y1, x2, y2);
+  isEqualTo(value1, value2) {
+    return value1 == value2;
   }
 }
 

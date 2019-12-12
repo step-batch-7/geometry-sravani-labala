@@ -12,7 +12,10 @@ describe("line", function() {
   describe("isEqualTo", function() {
     it("should give true if the line parameters and required parameters are equal", function() {
       let line = new Line(1, 2, 3, 4);
-      assert.strictEqual(line.isEqualTo(1, 2, 3, 4), true);
+      assert.strictEqual(line.isEqualTo(1, line.x1), true);
+      assert.strictEqual(line.isEqualTo(2, line.y1), true);
+      assert.strictEqual(line.isEqualTo(3, line.x2), true);
+      assert.strictEqual(line.isEqualTo(4, line.y2), true);
     });
   });
 });
