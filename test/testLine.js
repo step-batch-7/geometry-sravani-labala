@@ -5,7 +5,7 @@ const Line = require("./../src/line.js");
 
 describe("Line", function() {
   describe("toString", function() {
-    it("should give the points of the line ", function() {
+    it("should give string representation of the line ", function() {
       const endA = { x: 1, y: 2 };
       const endB = { x: 3, y: 4 };
       const line = new Line(endA, endB);
@@ -14,7 +14,7 @@ describe("Line", function() {
   });
 
   describe("isEqualTo", function() {
-    it("should give true if both lines are equal", function() {
+    it("should give true if both lines are similar", function() {
       const endA = { x: 1, y: 2 };
       const endB = { x: 3, y: 4 };
       const line = new Line(endA, endB);
@@ -24,7 +24,7 @@ describe("Line", function() {
       assert.strictEqual(line.isEqualTo(otherLine), true);
     });
 
-    it("should give false if both lines are not equal", function() {
+    it("should give false if both lines are not similar", function() {
       const endA = { x: 1, y: 2 };
       const endB = { x: 3, y: 4 };
       const line = new Line(endA, endB);
@@ -34,7 +34,7 @@ describe("Line", function() {
       assert.strictEqual(line.isEqualTo(otherLine), false);
     });
 
-    it("should give false if the type of other line doesn't belongs to the class Line", function() {
+    it("should give false if the type of 'other' doesn't belongs to the class Line", function() {
       const endA = { x: 1, y: 2 };
       const endB = { x: 3, y: 4 };
       const line = new Line(endA, endB);
