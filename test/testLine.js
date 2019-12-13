@@ -1,6 +1,6 @@
 "use strict";
 
-const assert = require("assert");
+const assert = require("chai").assert;
 const Line = require("./../src/line.js");
 
 describe("Line", function() {
@@ -18,28 +18,38 @@ describe("Line", function() {
       const endA = { x: 1, y: 2 };
       const endB = { x: 3, y: 4 };
       const line = new Line(endA, endB);
-      const otherLineEndA = { x: 1, y: 2 };
-      const otherLineEndB = { x: 3, y: 4 };
-      const otherLine = new Line(otherLineEndA, otherLineEndB);
-      assert.strictEqual(line.isEqualTo(otherLine), true);
+      const otherEndA = { x: 1, y: 2 };
+      const otherEndB = { x: 3, y: 4 };
+      const other = new Line(otherEndA, otherEndB);
+      assert.isTrue(line.isEqualTo(other));
     });
 
     it("should give false if both lines are not similar", function() {
       const endA = { x: 1, y: 2 };
       const endB = { x: 3, y: 4 };
       const line = new Line(endA, endB);
-      const otherLineEndA = { x: 1, y: 2 };
-      const otherLineEndB = { x: 3, y: 3 };
-      const otherLine = new Line(otherLineEndA, otherLineEndB);
-      assert.strictEqual(line.isEqualTo(otherLine), false);
+      const otherEndA = { x: 1, y: 2 };
+      const otherEndB = { x: 3, y: 3 };
+      const other = new Line(otherEndA, otherEndB);
+      assert.isFalse(line.isEqualTo(other));
     });
 
     it("should give false if the type of 'other' doesn't belongs to the class Line", function() {
       const endA = { x: 1, y: 2 };
       const endB = { x: 3, y: 4 };
       const line = new Line(endA, endB);
-      const otherLine = { endA: { x: 1, y: 2 }, endB: { x: 3, y: 4 } };
-      assert.strictEqual(line.isEqualTo(otherLine), false);
+      const other = { endA: { x: 1, y: 2 }, endB: { x: 3, y: 4 } };
+      assert.isFalse(line.isEqualTo(other));
+    });
+  });
+
+  describe("length", function() {
+    it("should give the length of the line of having all the positive coordinates", function() {
+      const endA = { x: 2, y: 1 };
+      const endB = { x: 6, y: 4 };
+      const line = new Line(endA, endB);
+      const expected = 5;
+      assert.strictEqual(line.length, expected);
     });
   });
 });
