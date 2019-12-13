@@ -51,5 +51,33 @@ describe("Line", function() {
       const expected = 5;
       assert.strictEqual(line.length, expected);
     });
+    it("should give the length of the line of having all the negative coordinates", function() {
+      const endA = { x: -2, y: -1 };
+      const endB = { x: -6, y: -4 };
+      const line = new Line(endA, endB);
+      const expected = 5;
+      assert.strictEqual(line.length, expected);
+    });
+    it("should give the length of the line of having both positive and negative coordinates", function() {
+      const endA = { x: -2, y: 1 };
+      const endB = { x: 6, y: -4 };
+      const line = new Line(endA, endB);
+      const expected = 9;
+      assert.approximately(line.length, expected, 0.5);
+    });
+    it("should give zero if the line having both end points equal", function() {
+      const endA = { x: 1, y: 1 };
+      const endB = { x: 1, y: 1 };
+      const line = new Line(endA, endB);
+      const expected = 0;
+      assert.approximately(line.length, expected, 0.5);
+    });
+    it("should give the square root of the sum of the one end point if the other end point is zero", function() {
+      const endA = { x: 1, y: 1 };
+      const endB = { x: 0, y: 0 };
+      const line = new Line(endA, endB);
+      const expected = 1;
+      assert.approximately(line.length, expected, 0.5);
+    });
   });
 });
