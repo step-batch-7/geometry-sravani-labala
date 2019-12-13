@@ -65,7 +65,7 @@ describe("Line", function() {
       const expected = 9;
       assert.approximately(line.length, expected, 0.5);
     });
-    it("should give the square root of the sum of the one end point if the other end point is zero", function() {
+    it("should give the square root of the sum of the one end point if the other end point is origin", function() {
       const endA = { x: 1, y: 1 };
       const endB = { x: 0, y: 0 };
       const line = new Line(endA, endB);
@@ -89,26 +89,46 @@ describe("Line", function() {
       const expected = 1;
       assert.strictEqual(line.slope, expected);
     });
-    it("should give the negative slope if the endB ordinate is less than endA ordinate", function() {
+    it("should give the negative slope if only the endB ordinate is less than endA ordinate", function() {
       const endA = { x: 0, y: 1 };
       const endB = { x: 1, y: 0 };
       const line = new Line(endA, endB);
       const expected = -1;
       assert.strictEqual(line.slope, expected);
     });
-    it("should give the negative slope if the endB abscissa is less than endA abscissa", function() {
+    it("should give the negative slope if only the endB abscissa is less than endA abscissa", function() {
       const endA = { x: 1, y: 0 };
       const endB = { x: 0, y: 1 };
       const line = new Line(endA, endB);
       const expected = -1;
       assert.strictEqual(line.slope, expected);
     });
-    it("should give the infinity if the x coordinates of the ends are the same", function() {
+    it("should give the positive infinity if the x coordinates are the same and endA ordinate is less than endB ordinate", function() {
       const endA = { x: 1, y: 0 };
       const endB = { x: 1, y: 5 };
       const line = new Line(endA, endB);
       const expected = Infinity;
       assert.strictEqual(line.slope, expected);
+    });
+    it("should give the negative infinity if the x coordinates are the same and endA ordinate is greater than endB ordinate", function() {
+      const endA = { x: 1, y: 5 };
+      const endB = { x: 1, y: 0 };
+      const line = new Line(endA, endB);
+      const expected = -Infinity;
+      assert.strictEqual(line.slope, expected);
+    });
+    it("should give zero if the differences between the ordinates is zero", function() {
+      const endA = { x: 2, y: 5 };
+      const endB = { x: 1, y: 5 };
+      const line = new Line(endA, endB);
+      const expected = 0;
+      assert.strictEqual(line.slope, expected);
+    });
+    it("should give NAN if differences between the ends is zero", function() {
+      const endA = { x: 2, y: 5 };
+      const endB = { x: 2, y: 5 };
+      const line = new Line(endA, endB);
+      assert.isNaN(line.slope);
     });
   });
 });
