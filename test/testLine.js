@@ -3,7 +3,7 @@
 const assert = require("assert");
 const Line = require("./../src/line.js");
 
-describe("line", function() {
+describe("Line", function() {
   describe("toString", function() {
     it("should give the points of the line ", function() {
       const endA = { x: 1, y: 2 };

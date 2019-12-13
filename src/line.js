@@ -1,7 +1,7 @@
 "use strict";
 
 const arePointsEqual = function(pointA, pointB) {
-  return pointA.x === pointB.x && pointA.y === pointB.y;
+  return pointA.x == pointB.x && pointA.y == pointB.y;
 };
 
 class Line {
@@ -14,11 +14,11 @@ class Line {
     return `Line (${this.endA.x},${this.endA.y}) (${this.endB.x},${this.endB.y})`;
   }
 
-  isEqualTo(otherLine) {
+  isEqualTo(other) {
+    if (!(other instanceof Line)) return false;
     return (
-      otherLine instanceof Line &&
-      arePointsEqual(this.endA, otherLine.endA) &&
-      arePointsEqual(this.endB, otherLine.endB)
+      arePointsEqual(this.endA, other.endA) &&
+      arePointsEqual(this.endB, other.endB)
     );
   }
 }
