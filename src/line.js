@@ -1,13 +1,13 @@
 "use strict";
 
-const arePointsEqual = function(a, b) {
-  return a.x === b.x && a.y === b.y;
+const arePointsEqual = function(pointA, pointB) {
+  return pointA.x === pointB.x && pointA.y === pointB.y;
 };
 
 class Line {
-  constructor([x1, y1], [x2, y2]) {
-    this.endA = { x: x1, y: y1 };
-    this.endB = { x: x2, y: y2 };
+  constructor(endA, endB) {
+    this.endA = { x: endA.x, y: endA.y };
+    this.endB = { x: endB.x, y: endB.y };
   }
 
   toString() {
@@ -15,10 +15,11 @@ class Line {
   }
 
   isEqualTo(otherLine) {
-    const instanceOfOtherLine = otherLine instanceof Line;
-    const areEndAEqual = arePointsEqual(this.endA, otherLine.endA);
-    const areEndBEqual = arePointsEqual(this.endB, otherLine.endB);
-    return areEndAEqual && areEndBEqual && instanceOfOtherLine;
+    return (
+      otherLine instanceof Line &&
+      arePointsEqual(this.endA, otherLine.endA) &&
+      arePointsEqual(this.endB, otherLine.endB)
+    );
   }
 }
 
