@@ -75,16 +75,9 @@ describe("Line", function() {
   });
 
   describe("slope", function() {
-    it("should give the positive slope consisting endA is greater than endB ", function() {
+    it("should give the positive slope when x and y points of one end is greater than the other", function() {
       const endA = { x: 1, y: 1 };
       const endB = { x: 0, y: 0 };
-      const line = new Line(endA, endB);
-      const expected = 1;
-      assert.strictEqual(line.slope, expected);
-    });
-    it("should give the positive slope consisting endA is less than endB", function() {
-      const endA = { x: 0, y: 0 };
-      const endB = { x: 1, y: 1 };
       const line = new Line(endA, endB);
       const expected = 1;
       assert.strictEqual(line.slope, expected);
@@ -110,14 +103,14 @@ describe("Line", function() {
       const expected = Infinity;
       assert.strictEqual(line.slope, expected);
     });
-    it("should give the negative infinity if the x coordinates are the same and endA ordinate is greater than endB ordinate", function() {
+    it("should give the negative infinity if the x coordinates are the same and endB ordinate is less than endA ordinate", function() {
       const endA = { x: 1, y: 5 };
       const endB = { x: 1, y: 0 };
       const line = new Line(endA, endB);
       const expected = -Infinity;
       assert.strictEqual(line.slope, expected);
     });
-    it("should give zero if the differences between the ordinates is zero", function() {
+    it("should give zero if the ordinates are equal", function() {
       const endA = { x: 2, y: 5 };
       const endB = { x: 1, y: 5 };
       const line = new Line(endA, endB);
@@ -129,6 +122,34 @@ describe("Line", function() {
       const endB = { x: 2, y: 5 };
       const line = new Line(endA, endB);
       assert.isNaN(line.slope);
+    });
+  });
+
+  describe("isParallelTo", function() {
+    it("should invalidate if the two lines are same", function() {
+      const lineAEndA = { x: 1, y: 2 };
+      const lineAEndB = { x: 3, y: 4 };
+      const lineA = new Line(lineAEndA, lineAEndB);
+      const lineB = lineA;
+      assert.isFalse(lineA.isParallelTo(lineB));
+    });
+    it("should invalidate if the two lines are not parallel", function() {
+      const lineAEndA = { x: 1, y: 3 };
+      const lineAEndB = { x: 3, y: 4 };
+      const lineA = new Line(lineAEndA, lineAEndB);
+      const lineBEndA = { x: 1, y: 2 };
+      const lineBEndB = { x: 3, y: 4 };
+      const lineB = new Line(lineBEndA, lineBEndB);
+      assert.isFalse(lineA.isParallelTo(lineB));
+    });
+    it("should validate if the two lines are parallel", function() {
+      const lineAEndA = { x: 1, y: 2 };
+      const lineAEndB = { x: 2, y: 3 };
+      const lineA = new Line(lineAEndA, lineAEndB);
+      const lineBEndA = { x: 3, y: 4 };
+      const lineBEndB = { x: 4, y: 5 };
+      const lineB = new Line(lineBEndA, lineBEndB);
+      assert.isTrue(lineA.isParallelTo(lineB));
     });
   });
 });

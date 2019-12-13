@@ -33,6 +33,11 @@ class Line {
     const denominator = this.endB.x - this.endA.x;
     return numerator / denominator;
   }
+
+  isParallelTo(other) {
+    if (!other instanceof Line || other == this) return false;
+    return other.slope == this.slope;
+  }
 }
 
 module.exports = Line;
