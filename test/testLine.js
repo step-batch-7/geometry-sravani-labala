@@ -1,6 +1,6 @@
 "use strict";
 
-const assert = require("chai").assert;
+const assert = require("assert");
 const Line = require("./../src/line.js");
 
 describe("line", function() {
@@ -21,7 +21,7 @@ describe("line", function() {
       const otherLineEndA = { x: 1, y: 2 };
       const otherLineEndB = { x: 3, y: 4 };
       const otherLine = new Line(otherLineEndA, otherLineEndB);
-      assert.isTrue(line.isEqualTo(otherLine));
+      assert.strictEqual(line.isEqualTo(otherLine), true);
     });
 
     it("should give false if both lines are not equal", function() {
@@ -31,7 +31,7 @@ describe("line", function() {
       const otherLineEndA = { x: 1, y: 2 };
       const otherLineEndB = { x: 3, y: 3 };
       const otherLine = new Line(otherLineEndA, otherLineEndB);
-      assert.isFalse(line.isEqualTo(otherLine));
+      assert.strictEqual(line.isEqualTo(otherLine), false);
     });
 
     it("should give false if the type of other line doesn't belongs to the class Line", function() {
@@ -39,7 +39,7 @@ describe("line", function() {
       const endB = { x: 3, y: 4 };
       const line = new Line(endA, endB);
       const otherLine = { endA: { x: 1, y: 2 }, endB: { x: 3, y: 4 } };
-      assert.isFalse(line.isEqualTo(otherLine));
+      assert.strictEqual(line.isEqualTo(otherLine), false);
     });
   });
 });
