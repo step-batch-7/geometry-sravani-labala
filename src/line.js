@@ -23,12 +23,15 @@ class Line {
   }
 
   get length() {
-    const diffOfXValues = this.endA.x - this.endB.x;
-    const diffOfYValues = this.endA.y - this.endB.y;
-    const sqrOfX = diffOfXValues * diffOfXValues;
-    const sqrOfY = diffOfYValues * diffOfYValues;
-    const distance = Math.sqrt(sqrOfX + sqrOfY);
-    return distance;
+    const diffOfXCoordinates = this.endA.x - this.endB.x;
+    const diffOfYCoordinates = this.endA.y - this.endB.y;
+    return Math.hypot(diffOfXCoordinates, diffOfYCoordinates);
+  }
+
+  get slope() {
+    const numerator = this.endB.y - this.endA.y;
+    const denominator = this.endB.x - this.endA.x;
+    return numerator / denominator;
   }
 }
 
