@@ -1,9 +1,5 @@
 "use strict";
 
-const intercept = function(point, slope) {
-  return point.y - slope * point.x;
-};
-
 const arePointsEqual = function(pointA, pointB) {
   return pointA.x === pointB.x && pointA.y === pointB.y;
 };
@@ -41,6 +37,19 @@ class Line {
   isParallelTo(other) {
     if (!(other instanceof Line) || this.isEqualTo(other)) return false;
     return other.slope == this.slope;
+  }
+
+  findY(x) {
+    const slope = this.slope;
+    const diffInX = x - this.endA.x;
+    return slope * diffInX + this.endA.y;
+  }
+
+  findX(y) {
+    const slope = this.slope;
+    const diffInY = y - this.endA.y;
+    const product = slope * this.endA.x;
+    return (diffInY + product) / slope;
   }
 }
 

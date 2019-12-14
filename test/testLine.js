@@ -152,4 +152,24 @@ describe("Line", function() {
       assert.isTrue(lineA.isParallelTo(lineB));
     });
   });
+
+  describe("findY", function() {
+    it("should give the y value for positive slope", function() {
+      const endA = { x: 1, y: 1 };
+      const endB = { x: 3, y: 2 };
+      const line = new Line(endA, endB);
+      const expected = 3.5;
+      assert.strictEqual(line.findY(6), expected);
+    });
+  });
+
+  describe("findx", function() {
+    it("should give the x value for positive slope", function() {
+      const endA = { x: 1, y: 1 };
+      const endB = { x: 3, y: 2 };
+      const line = new Line(endA, endB);
+      const expected = 6;
+      assert.strictEqual(line.findX(3.5), expected);
+    });
+  });
 });
