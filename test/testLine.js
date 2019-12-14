@@ -2,6 +2,7 @@
 
 const assert = require("chai").assert;
 const Line = require("./../src/line.js");
+const Point = require("./../src/point");
 
 describe("Line", function() {
   describe("toString", function() {
@@ -240,6 +241,32 @@ describe("Line", function() {
       const secondHalfLine = new Line(midPoint, endB);
       const expected = [firstHalfLine, secondHalfLine];
       assert.deepStrictEqual(line.split(), expected);
+    });
+  });
+
+  describe("hasPoint", function() {
+    it("should validate if the point is on the line", function() {
+      const point = new Point(2, 2);
+      const endA = { x: 5, y: 5 };
+      const endB = { x: 1, y: 1 };
+      const line = new Line(endA, endB);
+      assert.isTrue(line.hasPoint(point));
+    });
+
+    it("should invalidate if the point is not on the line", function() {
+      const point = new Point(2, 2);
+      const endA = { x: 5, y: 5 };
+      const endB = { x: 7, y: 1 };
+      const line = new Line(endA, endB);
+      assert.isFalse(line.hasPoint(point));
+    });
+
+    it("should invalidate if the point doesn't belong to the point class", function() {
+      const point = { x: 2, y: 2 };
+      const endA = { x: 5, y: 5 };
+      const endB = { x: 7, y: 1 };
+      const line = new Line(endA, endB);
+      assert.isFalse(line.hasPoint(point));
     });
   });
 });
