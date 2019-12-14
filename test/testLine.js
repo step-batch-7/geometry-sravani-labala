@@ -48,29 +48,25 @@ describe("Line", function() {
       const endA = { x: 2, y: 1 };
       const endB = { x: 6, y: 4 };
       const line = new Line(endA, endB);
-      const expected = 5;
-      assert.strictEqual(line.length, expected);
+      assert.strictEqual(line.length, 5);
     });
     it("should give the length of the line of having all the negative coordinates", function() {
       const endA = { x: -2, y: -1 };
       const endB = { x: -6, y: -4 };
       const line = new Line(endA, endB);
-      const expected = 5;
-      assert.strictEqual(line.length, expected);
+      assert.strictEqual(line.length, 5);
     });
     it("should give the length of the line of having both positive and negative coordinates", function() {
       const endA = { x: -2, y: 1 };
       const endB = { x: 6, y: -4 };
       const line = new Line(endA, endB);
-      const expected = 9;
-      assert.approximately(line.length, expected, 0.5);
+      assert.approximately(line.length, 9, 0.5);
     });
     it("should give the square root of the sum of the one end point if the other end point is origin", function() {
       const endA = { x: 1, y: 1 };
       const endB = { x: 0, y: 0 };
       const line = new Line(endA, endB);
-      const expected = 1;
-      assert.approximately(line.length, expected, 0.5);
+      assert.approximately(line.length, 1, 0.5);
     });
   });
 
@@ -79,22 +75,19 @@ describe("Line", function() {
       const endA = { x: 1, y: 1 };
       const endB = { x: 0, y: 0 };
       const line = new Line(endA, endB);
-      const expected = 1;
-      assert.strictEqual(line.slope, expected);
+      assert.strictEqual(line.slope, 1);
     });
     it("should give the negative slope if only the endB ordinate is less than endA ordinate", function() {
       const endA = { x: 0, y: 1 };
       const endB = { x: 1, y: 0 };
       const line = new Line(endA, endB);
-      const expected = -1;
-      assert.strictEqual(line.slope, expected);
+      assert.strictEqual(line.slope, -1);
     });
     it("should give the negative slope if only the endB abscissa is less than endA abscissa", function() {
       const endA = { x: 1, y: 0 };
       const endB = { x: 0, y: 1 };
       const line = new Line(endA, endB);
-      const expected = -1;
-      assert.strictEqual(line.slope, expected);
+      assert.strictEqual(line.slope, -1);
     });
     it("should give the positive infinity if the x coordinates are the same and endA ordinate is less than endB ordinate", function() {
       const endA = { x: 1, y: 0 };
@@ -114,8 +107,7 @@ describe("Line", function() {
       const endA = { x: 2, y: 5 };
       const endB = { x: 1, y: 5 };
       const line = new Line(endA, endB);
-      const expected = 0;
-      assert.strictEqual(line.slope, expected);
+      assert.strictEqual(line.slope, 0);
     });
     it("should give NAN if differences between the ends is zero", function() {
       const endA = { x: 2, y: 5 };
@@ -154,22 +146,33 @@ describe("Line", function() {
   });
 
   describe("findY", function() {
-    it("should give the y value for positive slope", function() {
-      const endA = { x: 1, y: 1 };
-      const endB = { x: 3, y: 2 };
+    it("should give the y value if x is given", function() {
+      const endA = { x: 2, y: 1 };
+      const endB = { x: 1, y: 2 };
       const line = new Line(endA, endB);
-      const expected = 3.5;
-      assert.strictEqual(line.findY(6), expected);
+      assert.strictEqual(line.findY(1), 2);
     });
   });
 
-  describe("findx", function() {
-    it("should give the x value for positive slope", function() {
-      const endA = { x: 1, y: 1 };
-      const endB = { x: 3, y: 2 };
+  describe("findX", function() {
+    it("should give the x value if y is given", function() {
+      const endA = { x: 2, y: 1 };
+      const endB = { x: 1, y: 2 };
       const line = new Line(endA, endB);
-      const expected = 6;
-      assert.strictEqual(line.findX(3.5), expected);
+      assert.strictEqual(line.findX(1), 2);
+    });
+  });
+
+  describe("split", function() {
+    it("should give 2 lines splitted exactly at the centre of line", function() {
+      const endA = { x: 5, y: 5 };
+      const endB = { x: 1, y: 1 };
+      const midPoint = { x: 3, y: 3 };
+      const line = new Line(endA, endB);
+      const firstHalfLine = new Line(endA, midPoint);
+      const secondHalfLine = new Line(midPoint, endB);
+      const expected = [firstHalfLine, secondHalfLine];
+      assert.deepStrictEqual(line.split(), expected);
     });
   });
 });
