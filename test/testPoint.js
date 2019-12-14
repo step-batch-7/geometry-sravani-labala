@@ -41,4 +41,10 @@ describe("class", function() {
       assert.isFalse(point.isEqualTo(other));
     });
   });
+  describe("clone", function() {
+    it("should give the exact copy of the given point", function() {
+      const point = new Point(2, 3);
+      assert.deepStrictEqual(point.clone(), point);
+    });
+  });
 });

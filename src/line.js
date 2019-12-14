@@ -1,5 +1,9 @@
 "use strict";
 
+const intercept = function(point, slope) {
+  return point.y - slope * point.x;
+};
+
 const arePointsEqual = function(pointA, pointB) {
   return pointA.x === pointB.x && pointA.y === pointB.y;
 };
