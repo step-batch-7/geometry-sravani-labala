@@ -4,6 +4,12 @@ const arePointsEqual = function(pointA, pointB) {
   return pointA.x === pointB.x && pointA.y === pointB.y;
 };
 
+const getMidPoint = function(endA, endB) {
+  const midOfX = (endA.x + endB.x) / 2;
+  const midOfY = (endA.y + endB.y) / 2;
+  return { x: midOfX, y: midOfY };
+};
+
 class Line {
   constructor(endA, endB) {
     this.endA = { x: endA.x, y: endA.y };
@@ -54,9 +60,7 @@ class Line {
 
   split() {
     const { endA, endB } = this;
-    const midOfX = (endA.x + endB.x) / 2;
-    const midOfY = (endA.y + endB.y) / 2;
-    const midPoint = { x: midOfX, y: midOfY };
+    const midPoint = getMidPoint(endA, endB);
     const firstHalfLine = new Line(endA, midPoint);
     const secondHalfLine = new Line(midPoint, endB);
     return [firstHalfLine, secondHalfLine];

@@ -35,7 +35,7 @@ describe("class", function() {
       assert.isFalse(point.isEqualTo(other));
     });
 
-    it("should give false if the type of 'other' doesn't belongs to the class Point", function() {
+    it("should give false if the instance of 'other' doesn't belongs to the class Point", function() {
       const point = new Point(2, 3);
       const other = { x: 2, y: 3 };
       assert.isFalse(point.isEqualTo(other));

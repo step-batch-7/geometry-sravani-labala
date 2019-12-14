@@ -34,7 +34,7 @@ describe("Line", function() {
       assert.isFalse(line.isEqualTo(other));
     });
 
-    it("should give false if the type of 'other' doesn't belongs to the class Line", function() {
+    it("should give false if the instance of 'other' doesn't belongs to the class Line", function() {
       const endA = { x: 1, y: 2 };
       const endB = { x: 3, y: 4 };
       const line = new Line(endA, endB);
@@ -146,20 +146,32 @@ describe("Line", function() {
   });
 
   describe("findY", function() {
-    it("should give the y value if x is given", function() {
+    it("should give the y coordinate if the line has positive coordinates ", function() {
       const endA = { x: 2, y: 1 };
       const endB = { x: 1, y: 2 };
       const line = new Line(endA, endB);
       assert.strictEqual(line.findY(1), 2);
     });
+    it("should give the y coordinate if the line has negative coordinates ", function() {
+      const endA = { x: -2, y: -1 };
+      const endB = { x: -1, y: -2 };
+      const line = new Line(endA, endB);
+      assert.strictEqual(line.findY(1), -4);
+    });
   });
 
   describe("findX", function() {
-    it("should give the x value if y is given", function() {
+    it("should give the x coordinate if the line has positive coordinates", function() {
       const endA = { x: 2, y: 1 };
       const endB = { x: 1, y: 2 };
       const line = new Line(endA, endB);
       assert.strictEqual(line.findX(1), 2);
+    });
+    it("should give the x coordinate if the line has negative coordinates", function() {
+      const endA = { x: -2, y: -1 };
+      const endB = { x: -1, y: -2 };
+      const line = new Line(endA, endB);
+      assert.strictEqual(line.findX(1), -4);
     });
   });
 
