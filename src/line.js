@@ -11,7 +11,7 @@ class Line {
   }
 
   toString() {
-    return `Line (${this.endA.x},${this.endA.y}) (${this.endB.x},${this.endB.y})`;
+    return `[Line (${this.endA.x},${this.endA.y}) to (${this.endB.x},${this.endB.y})]`;
   }
 
   isEqualTo(other) {
@@ -35,7 +35,7 @@ class Line {
   }
 
   isParallelTo(other) {
-    if (!other instanceof Line || other == this) return false;
+    if (!(other instanceof Line) || this.isEqualTo(other)) return false;
     return other.slope == this.slope;
   }
 }

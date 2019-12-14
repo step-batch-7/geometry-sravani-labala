@@ -7,9 +7,9 @@ describe("Line", function() {
   describe("toString", function() {
     it("should give string representation of the line ", function() {
       const endA = { x: 1, y: 2 };
-      const endB = { x: 3, y: 4 };
+      const endB = { x: 2, y: 3 };
       const line = new Line(endA, endB);
-      assert.strictEqual(line.toString(), "Line (1,2) (3,4)");
+      assert.strictEqual(line.toString(), "[Line (1,2) to (2,3)]");
     });
   });
 
@@ -75,7 +75,7 @@ describe("Line", function() {
   });
 
   describe("slope", function() {
-    it("should give the positive slope when x and y points of one end is greater than the other", function() {
+    it("should give the positive slope when x and y coordinates of one end is greater than the other", function() {
       const endA = { x: 1, y: 1 };
       const endB = { x: 0, y: 0 };
       const line = new Line(endA, endB);
@@ -130,7 +130,7 @@ describe("Line", function() {
       const lineAEndA = { x: 1, y: 2 };
       const lineAEndB = { x: 3, y: 4 };
       const lineA = new Line(lineAEndA, lineAEndB);
-      const lineB = lineA;
+      const lineB = new Line(lineAEndA, lineAEndB);
       assert.isFalse(lineA.isParallelTo(lineB));
     });
     it("should invalidate if the two lines are not parallel", function() {
