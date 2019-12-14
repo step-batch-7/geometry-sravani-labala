@@ -46,15 +46,23 @@ class Line {
   }
 
   findY(x) {
+    const { endA, endB } = this;
+    const minimumOfX = Math.min(endA.x, endB.x);
+    const maximumOfX = Math.max(endA.x, endB.x);
+    if (x < minimumOfX || x > maximumOfX) return NaN;
     const slope = this.slope;
-    const diffInX = x - this.endA.x;
-    return slope * diffInX + this.endA.y;
+    const diffInX = x - endA.x;
+    return slope * diffInX + endA.y;
   }
 
   findX(y) {
+    const { endA, endB } = this;
+    const minimumOfY = Math.min(endA.y, endB.y);
+    const maximumOfY = Math.max(endA.y, endB.y);
+    if (y < minimumOfY || y > maximumOfY) return NaN;
     const slope = this.slope;
-    const diffInY = y - this.endA.y;
-    const product = slope * this.endA.x;
+    const diffInY = y - endA.y;
+    const product = slope * endA.x;
     return (diffInY + product) / slope;
   }
 
