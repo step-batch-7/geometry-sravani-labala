@@ -30,43 +30,43 @@ class Line {
   }
 
   get length() {
-    const dx = this.endA.x - this.endB.x;
-    const dy = this.endA.y - this.endB.y;
+    const dx = this.endB.x - this.endA.x;
+    const dy = this.endB.y - this.endA.y;
     return Math.sqrt(dx ** 2 + dy ** 2);
   }
 
   get slope() {
-    const numerator = this.endB.y - this.endA.y;
-    const denominator = this.endB.x - this.endA.x;
-    return numerator / denominator;
+    const dy = this.endB.y - this.endA.y;
+    const dx = this.endB.x - this.endA.x;
+    return dy / dx;
   }
 
   isParallelTo(other) {
     if (!(other instanceof Line) || this.isEqualTo(other)) return false;
-    return other.slope == this.slope;
+    const areLinesOverlapping =
+      this.hasPoint(new Point(other.endA.x, other.endA.y)) ||
+      this.hasPoint(new Point(other.endB.x, other.endB.y));
+    return !areLinesOverlapping && this.slope == other.slope;
   }
 
   findY(x) {
-    const { endA, endB } = this;
+    const { endA, endB, slope } = this;
     const minimumOfX = Math.min(endA.x, endB.x);
     const maximumOfX = Math.max(endA.x, endB.x);
     if (x < minimumOfX || x > maximumOfX) return NaN;
     if (endA.x == endB.x) return endA.y;
-    const slope = this.slope;
-    const diffInX = x - endA.x;
-    return slope * diffInX + endA.y;
+    const dx = x - endA.x;
+    return slope * dx + endA.y;
   }
 
   findX(y) {
-    const { endA, endB } = this;
+    const { endA, endB, slope } = this;
     const minimumOfY = Math.min(endA.y, endB.y);
     const maximumOfY = Math.max(endA.y, endB.y);
     if (y < minimumOfY || y > maximumOfY) return NaN;
     if (endA.y == endB.y) return endA.x;
-    const slope = this.slope;
-    const diffInY = y - endA.y;
-    const product = slope * endA.x;
-    return (diffInY + product) / slope;
+    const dy = y - endA.y;
+    return endA.x + dy / slope;
   }
 
   split() {
@@ -79,7 +79,7 @@ class Line {
 
   hasPoint(point) {
     if (!(point instanceof Point)) return false;
-    return point.x == this.findX(point.y);
+    return point.y == this.findY(point.x) || point.x == this.findX(point.y);
   }
 }
 
