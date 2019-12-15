@@ -30,9 +30,9 @@ class Line {
   }
 
   get length() {
-    const diffOfXCoordinates = this.endA.x - this.endB.x;
-    const diffOfYCoordinates = this.endA.y - this.endB.y;
-    return Math.hypot(diffOfXCoordinates, diffOfYCoordinates);
+    const dx = this.endA.x - this.endB.x;
+    const dy = this.endA.y - this.endB.y;
+    return Math.sqrt(dx ** 2 + dy ** 2);
   }
 
   get slope() {
@@ -51,6 +51,7 @@ class Line {
     const minimumOfX = Math.min(endA.x, endB.x);
     const maximumOfX = Math.max(endA.x, endB.x);
     if (x < minimumOfX || x > maximumOfX) return NaN;
+    if (endA.x == endB.x) return endA.y;
     const slope = this.slope;
     const diffInX = x - endA.x;
     return slope * diffInX + endA.y;
@@ -61,6 +62,7 @@ class Line {
     const minimumOfY = Math.min(endA.y, endB.y);
     const maximumOfY = Math.max(endA.y, endB.y);
     if (y < minimumOfY || y > maximumOfY) return NaN;
+    if (endA.y == endB.y) return endA.x;
     const slope = this.slope;
     const diffInY = y - endA.y;
     const product = slope * endA.x;

@@ -1,3 +1,5 @@
+"use strict";
+
 class Point {
   constructor(abscissa, ordinate) {
     this.x = abscissa;
@@ -16,6 +18,7 @@ class Point {
     if (!(other instanceof Point)) return false;
     return this.x === other.x && this.y === other.y;
   }
+
   clone() {
     return new Point(this.x, this.y);
   }

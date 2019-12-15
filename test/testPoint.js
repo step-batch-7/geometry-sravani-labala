@@ -1,3 +1,5 @@
+"use strict";
+
 const assert = require("chai").assert;
 const Point = require("./../src/point");
 
@@ -8,6 +10,7 @@ describe("class", function() {
       assert.strictEqual(point.toString(), "[Point @(2,3)]");
     });
   });
+
   describe("visit", function() {
     it("should give the result of the operation", function() {
       const point = new Point(2, 3);
@@ -41,6 +44,7 @@ describe("class", function() {
       assert.isFalse(point.isEqualTo(other));
     });
   });
+
   describe("clone", function() {
     it("should give the exact copy of the given point", function() {
       const point = new Point(2, 3);
