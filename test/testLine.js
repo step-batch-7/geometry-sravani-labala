@@ -28,6 +28,10 @@ describe("Line", function() {
       const other = { endA: { x: 1, y: 2 }, endB: { x: 3, y: 4 } };
       assert.isFalse(line.isEqualTo(other));
     });
+    it("should give true if same line is given", function() {
+      const line = new Line({ x: 3, y: 3 }, { x: 6, y: 7 });
+      assert.isTrue(line.isEqualTo(line));
+    });
   });
 
   describe("length", function() {
@@ -81,33 +85,38 @@ describe("Line", function() {
   });
 
   describe("isParallelTo", function() {
-    it("should invalidate if the two lines are same", function() {
+    it("should give false if the two lines are same", function() {
       const lineA = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       const lineB = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       assert.isFalse(lineA.isParallelTo(lineB));
     });
-    it("should invalidate if the two lines are not parallel", function() {
+    it("should give false if the two lines are not parallel", function() {
       const lineA = new Line({ x: 1, y: 3 }, { x: 3, y: 4 });
       const lineB = new Line({ x: 1, y: 2 }, { x: 3, y: 4 });
       assert.isFalse(lineA.isParallelTo(lineB));
     });
-    it("should validate if the two lines are parallel", function() {
+    it("should give true if the two lines are parallel", function() {
       const lineA = new Line({ x: 1, y: 2 }, { x: 2, y: 3 });
-      const lineB = new Line({ x: 3, y: 4 }, { x: 4, y: 5 });
+      const lineB = new Line({ x: 1, y: 1 }, { x: 2, y: 2 });
       assert.isTrue(lineA.isParallelTo(lineB));
     });
-    it("should invalidate if instance of Line is not passed", function() {
+    it("should give false if instance of Line is not passed", function() {
       const lineA = new Line({ x: 10, y: 15 }, { x: 40, y: 31 });
       const lineB = { endA: { x: 1, y: 2 }, endB: { x: 2, y: 3 } };
       assert.isFalse(lineA.isParallelTo(lineB));
     });
-    it("should invalidate for the lines overlapping", function() {
-      let line1 = new Line({ x: 0, y: 0 }, { x: 4, y: 0 });
-      let line2 = new Line({ x: 1, y: 0 }, { x: 3, y: 0 });
-      assert.isFalse(line1.isParallelTo(line2));
-      line1 = new Line({ x: 0, y: 0 }, { x: 0, y: 4 });
-      line2 = new Line({ x: 0, y: 1 }, { x: 0, y: 3 });
-      assert.isFalse(line1.isParallelTo(line2));
+    it("should give false for the overlapping lines", function() {
+      let lineA = new Line({ x: 0, y: 0 }, { x: 4, y: 0 });
+      let lineB = new Line({ x: 1, y: 0 }, { x: 3, y: 0 });
+      assert.isFalse(lineA.isParallelTo(lineB));
+      lineA = new Line({ x: 0, y: 0 }, { x: 0, y: 4 });
+      lineB = new Line({ x: 0, y: 1 }, { x: 0, y: 3 });
+      assert.isFalse(lineA.isParallelTo(lineB));
+    });
+    it("should give false if two lines have same slope but are collinear", function() {
+      const lineA = new Line({ x: 2, y: 2 }, { x: 5, y: 2 });
+      const lineB = new Line({ x: 7, y: 2 }, { x: 12, y: 2 });
+      assert.isFalse(lineA.isParallelTo(lineB));
     });
   });
 

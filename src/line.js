@@ -11,6 +11,13 @@ const getMidPoint = function(endA, endB) {
   return { x: midOfX, y: midOfY };
 };
 
+const areCollinear = function(pointA, pointB, pointC) {
+  const [x1, y1] = [pointA.x, pointA.y];
+  const [x2, y2] = [pointB.x, pointB.y];
+  const [x3, y3] = [pointC.x, pointC.y];
+  return x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2) == 0;
+};
+
 class Line {
   constructor(endA, endB) {
     this.endA = { x: endA.x, y: endA.y };
@@ -42,11 +49,9 @@ class Line {
   }
 
   isParallelTo(other) {
-    if (!(other instanceof Line) || this.isEqualTo(other)) return false;
-    const areLinesOverlapping =
-      this.hasPoint(new Point(other.endA.x, other.endA.y)) ||
-      this.hasPoint(new Point(other.endB.x, other.endB.y));
-    return !areLinesOverlapping && this.slope == other.slope;
+    if (!(other instanceof Line) || this === other) return false;
+    if (areCollinear(this.endA, this.endB, other.endA)) return false;
+    return this.slope === other.slope;
   }
 
   findY(x) {
