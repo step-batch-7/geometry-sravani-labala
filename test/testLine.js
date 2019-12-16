@@ -226,5 +226,25 @@ describe("Line", function() {
       const line = new Line({ x: 3, y: 4 }, { x: 6, y: 4 });
       assert.isNull(line.findPointFromStart(10));
     });
+    it("should give null if the distance given is not a number", function() {
+      const line = new Line({ x: 3, y: 4 }, { x: 6, y: 4 });
+      assert.isNull(line.findPointFromStart("number"));
+    });
+  });
+
+  describe("findPointFromEnd", function() {
+    it("should give the point of the certain distance from the end of the line if it exists on the line segment", function() {
+      const line = new Line({ x: 3, y: 4 }, { x: 6, y: 4 });
+      const point = new Point(3, 4);
+      assert.deepStrictEqual(line.findPointFromEnd(3), point);
+    });
+    it("should give null if the distance is greater than the line distance", function() {
+      const line = new Line({ x: 3, y: 4 }, { x: 6, y: 4 });
+      assert.isNull(line.findPointFromEnd(10));
+    });
+    it("should give null if the distance given is not a number", function() {
+      const line = new Line({ x: 3, y: 4 }, { x: 6, y: 4 });
+      assert.isNull(line.findPointFromStart("number"));
+    });
   });
 });

@@ -94,11 +94,21 @@ class Line {
   }
 
   findPointFromStart(distance) {
+    if (!Number.isInteger(distance)) return null;
     const { endA, endB } = this;
     const lineLength = this.length;
     const ratioOfDistances = distance / lineLength;
     if (ratioOfDistances < 0 || ratioOfDistances > 1) return null;
     return getPoint(ratioOfDistances, endA, endB);
+  }
+
+  findPointFromEnd(distance) {
+    if (!Number.isInteger(distance)) return null;
+    const { endA, endB } = this;
+    const lineLength = this.length;
+    const ratioOfDistances = distance / lineLength;
+    if (ratioOfDistances < 0 || ratioOfDistances > 1) return null;
+    return getPoint(ratioOfDistances, endB, endA);
   }
 }
 
