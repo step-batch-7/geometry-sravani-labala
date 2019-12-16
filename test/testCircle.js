@@ -43,12 +43,20 @@ describe("Circle", function() {
       const circle = new Circle({ x: 3, y: 3 }, 7);
       assert.approximately(circle.area, 154, 0.5);
     });
+    it("should give zero as the area of the circle when the radius is zero ", function() {
+      const circle = new Circle({ x: 3, y: 3 }, 0);
+      assert.strictEqual(circle.area, 0);
+    });
   });
 
   describe("perimeter", function() {
     it("should give the perimeter of the circle of the given radius", function() {
       const circle = new Circle({ x: 3, y: 3 }, 7);
       assert.approximately(circle.perimeter, 44, 0.5);
+    });
+    it("should give zero as the perimeter of the circle when the radius is zero ", function() {
+      const circle = new Circle({ x: 3, y: 3 }, 0);
+      assert.strictEqual(circle.perimeter, 0);
     });
   });
 });
