@@ -226,6 +226,10 @@ describe("Line", function() {
       const line = new Line({ x: 3, y: 4 }, { x: 6, y: 4 });
       assert.isNull(line.findPointFromStart(10));
     });
+    it("should give null if the distance is less than the line distance or negative", function() {
+      const line = new Line({ x: 3, y: 4 }, { x: 6, y: 4 });
+      assert.isNull(line.findPointFromStart(-1));
+    });
     it("should give null if the distance given is not a number", function() {
       const line = new Line({ x: 3, y: 4 }, { x: 6, y: 4 });
       assert.isNull(line.findPointFromStart("number"));
@@ -242,9 +246,13 @@ describe("Line", function() {
       const line = new Line({ x: 3, y: 4 }, { x: 6, y: 4 });
       assert.isNull(line.findPointFromEnd(10));
     });
+    it("should give null if the distance is less than the line distance or negative", function() {
+      const line = new Line({ x: 3, y: 4 }, { x: 6, y: 4 });
+      assert.isNull(line.findPointFromEnd(-1));
+    });
     it("should give null if the distance given is not a number", function() {
       const line = new Line({ x: 3, y: 4 }, { x: 6, y: 4 });
-      assert.isNull(line.findPointFromStart("number"));
+      assert.isNull(line.findPointFromEnd("number"));
     });
   });
 });
