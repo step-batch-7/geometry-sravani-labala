@@ -9,9 +9,8 @@ const getMidPoint = function(endA, endB) {
 };
 
 const isOutOfRange = function(range, value) {
-  const [point1, point2] = [...range];
-  if (point1 > point2) return point2 < value && value > point1;
-  return point1 < value && value > point2;
+  const [lowerLimit, higherLimit] = range.sort();
+  return lowerLimit < value && value > higherLimit;
 };
 
 const areCollinear = function(pointA, pointB, pointC) {
