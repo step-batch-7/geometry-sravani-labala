@@ -32,4 +32,11 @@ describe("Circle", function() {
       assert.isTrue(circle.isEqualTo(circle));
     });
   });
+
+  describe("area", function() {
+    it("should give the area of the circle of the given radius", function() {
+      const circle = new Circle({ x: 3, y: 3 }, 7);
+      assert.strictEqual(circle.area, 154);
+    });
+  });
 });
