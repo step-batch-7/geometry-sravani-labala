@@ -30,8 +30,8 @@ class Point {
     return Math.sqrt(dx ** 2 + dy ** 2);
   }
 
-  isOn(other) {
-    return other.hasPoint(this);
+  isOn(shape) {
+    return shape.hasPoint(this);
   }
 }
 

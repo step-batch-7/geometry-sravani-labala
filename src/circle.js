@@ -24,6 +24,11 @@ class Circle {
   get perimeter() {
     return Math.PI * 2 * this.radius;
   }
+
+  hasPoint(other) {
+    if (!(other instanceof Point)) return false;
+    return this.center.findDistanceTo(other) === this.radius;
+  }
 }
 
 module.exports = Circle;

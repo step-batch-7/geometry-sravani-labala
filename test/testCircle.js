@@ -2,6 +2,7 @@
 
 const assert = require("chai").assert;
 const Circle = require("./../src/circle");
+const Point = require("./../src/point");
 
 describe("Circle", function() {
   describe("toString", function() {
@@ -57,6 +58,24 @@ describe("Circle", function() {
     it("should give zero as the perimeter of the circle when the radius is zero ", function() {
       const circle = new Circle({ x: 3, y: 3 }, 0);
       assert.strictEqual(circle.perimeter, 0);
+    });
+  });
+
+  describe("hasPoint", function() {
+    it("should give true if the point is present in the circumference", function() {
+      const circle = new Circle({ x: 0, y: 0 }, 7);
+      const point = new Point(0, 7);
+      assert.isTrue(circle.hasPoint(point));
+    });
+    it("should give false if the point is present in the circumference", function() {
+      const circle = new Circle({ x: 3, y: 3 }, 7);
+      const point = new Point(3, 3);
+      assert.isFalse(circle.hasPoint(point));
+    });
+    it("should give false if the point doesn't belong to the point class", function() {
+      const circle = new Circle({ x: 0, y: 0 }, 7);
+      const point = { x: 0, y: 7 };
+      assert.isFalse(circle.hasPoint(point));
     });
   });
 });
