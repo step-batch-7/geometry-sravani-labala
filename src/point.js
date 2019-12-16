@@ -1,4 +1,5 @@
 "use strict";
+const Line = require("./line.js");
 
 class Point {
   constructor(abscissa, ordinate) {
@@ -28,6 +29,10 @@ class Point {
     const dx = this.x - other.x;
     const dy = this.y - other.y;
     return Math.sqrt(dx ** 2 + dy ** 2);
+  }
+
+  isOn(other) {
+    return other.hasPoint(this);
   }
 }
 
