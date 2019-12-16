@@ -5,7 +5,7 @@ const Point = require("./point");
 const getMidPoint = function(endA, endB) {
   const midOfX = (endA.x + endB.x) / 2;
   const midOfY = (endA.y + endB.y) / 2;
-  return { x: midOfX, y: midOfY };
+  return new Point(midOfX, midOfY);
 };
 
 const isOutOfRange = function(range, value) {
@@ -21,9 +21,9 @@ const areCollinear = function(pointA, pointB, pointC) {
   return x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2) == 0;
 };
 
-const getPoint = function(t, point1, point2) {
-  const xCoordinate = (1 - t) * point1.x + t * point2.x;
-  const yCoordinate = (1 - t) * point1.y + t * point2.y;
+const getPoint = function(ratio, point1, point2) {
+  const xCoordinate = (1 - ratio) * point1.x + ratio * point2.x;
+  const yCoordinate = (1 - ratio) * point1.y + ratio * point2.y;
   return new Point(xCoordinate, yCoordinate);
 };
 
