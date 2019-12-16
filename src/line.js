@@ -11,6 +11,12 @@ const getMidPoint = function(endA, endB) {
   return { x: midOfX, y: midOfY };
 };
 
+const isOutOfRange = function(range, value) {
+  const [point1, point2] = [...range];
+  if (point1 > point2) return point2 < value && value > point1;
+  return point1 < value && value > point2;
+};
+
 const areCollinear = function(pointA, pointB, pointC) {
   const [x1, y1] = [pointA.x, pointA.y];
   const [x2, y2] = [pointB.x, pointB.y];
@@ -62,9 +68,7 @@ class Line {
 
   findY(x) {
     const { endA, endB, slope } = this;
-    const minimumOfX = Math.min(endA.x, endB.x);
-    const maximumOfX = Math.max(endA.x, endB.x);
-    if (x < minimumOfX || x > maximumOfX) return NaN;
+    if (isOutOfRange([endA.x, endB.x], x)) return NaN;
     if (endA.x == endB.x) return endA.y;
     const dx = x - endA.x;
     return slope * dx + endA.y;
@@ -72,9 +76,7 @@ class Line {
 
   findX(y) {
     const { endA, endB, slope } = this;
-    const minimumOfY = Math.min(endA.y, endB.y);
-    const maximumOfY = Math.max(endA.y, endB.y);
-    if (y < minimumOfY || y > maximumOfY) return NaN;
+    if (isOutOfRange([endA.y, endB.y], y)) return NaN;
     if (endA.y == endB.y) return endA.x;
     const dy = y - endA.y;
     return endA.x + dy / slope;
@@ -94,20 +96,18 @@ class Line {
   }
 
   findPointFromStart(distance) {
-    if (!Number.isInteger(distance)) return null;
-    const { endA, endB } = this;
-    const lineLength = this.length;
-    const ratioOfDistances = distance / lineLength;
-    if (ratioOfDistances < 0 || ratioOfDistances > 1) return null;
+    const { endA, endB, length } = this;
+    if (!Number.isInteger(distance) || distance < 0 || distance > length)
+      return null;
+    const ratioOfDistances = distance / length;
     return getPoint(ratioOfDistances, endA, endB);
   }
 
   findPointFromEnd(distance) {
-    if (!Number.isInteger(distance)) return null;
-    const { endA, endB } = this;
-    const lineLength = this.length;
-    const ratioOfDistances = distance / lineLength;
-    if (ratioOfDistances < 0 || ratioOfDistances > 1) return null;
+    const { endA, endB, length } = this;
+    if (!Number.isInteger(distance) || distance < 0 || distance > length)
+      return null;
+    const ratioOfDistances = distance / length;
     return getPoint(ratioOfDistances, endB, endA);
   }
 }
