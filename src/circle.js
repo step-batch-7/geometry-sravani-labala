@@ -18,11 +18,11 @@ class Circle {
   }
 
   get area() {
-    return (22 / 7) * this.radius * this.radius;
+    return Math.PI * this.radius * this.radius;
   }
 
   get perimeter() {
-    return (22 / 7) * 2 * this.radius;
+    return Math.PI * 2 * this.radius;
   }
 }
 

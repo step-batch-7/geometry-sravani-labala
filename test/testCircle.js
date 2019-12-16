@@ -36,14 +36,14 @@ describe("Circle", function() {
   describe("area", function() {
     it("should give the area of the circle of the given radius", function() {
       const circle = new Circle({ x: 3, y: 3 }, 7);
-      assert.strictEqual(circle.area, 154);
+      assert.approximately(circle.area, 154, 0.5);
     });
   });
 
   describe("perimeter", function() {
     it("should give the perimeter of the circle of the given radius", function() {
       const circle = new Circle({ x: 3, y: 3 }, 7);
-      assert.strictEqual(circle.perimeter, 44);
+      assert.approximately(circle.perimeter, 44, 0.5);
     });
   });
 });
