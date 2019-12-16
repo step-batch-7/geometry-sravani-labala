@@ -1,5 +1,4 @@
 "use strict";
-const Line = require("./line.js");
 
 class Point {
   constructor(abscissa, ordinate) {
