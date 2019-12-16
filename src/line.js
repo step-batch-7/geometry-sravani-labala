@@ -91,16 +91,14 @@ class Line {
 
   findPointFromStart(distance) {
     const { endA, endB, length } = this;
-    if (!Number.isInteger(distance) || distance < 0 || distance > length)
-      return null;
+    if (distance < 0 || distance > length) return null;
     const ratioOfDistances = distance / length;
     return getPoint(ratioOfDistances, endA, endB);
   }
 
   findPointFromEnd(distance) {
     const { endA, endB, length } = this;
-    if (!Number.isInteger(distance) || distance < 0 || distance > length)
-      return null;
+    if (distance < 0 || distance > length) return null;
     const ratioOfDistances = distance / length;
     return getPoint(ratioOfDistances, endB, endA);
   }
