@@ -51,4 +51,32 @@ describe("class", function() {
       assert.deepStrictEqual(point.clone(), point);
     });
   });
+
+  describe("findDistanceTo", function() {
+    it("should give the distance between the positive points", function() {
+      const point1 = new Point(2, 1);
+      const point2 = new Point(6, 4);
+      assert.strictEqual(point1.findDistanceTo(point2), 5);
+    });
+    it("should give the distance between the negative points", function() {
+      const point1 = new Point(-2, -1);
+      const point2 = new Point(-6, -4);
+      assert.strictEqual(point1.findDistanceTo(point2), 5);
+    });
+    it("should give the distance between both positive and negative points", function() {
+      const point1 = new Point(-2, 1);
+      const point2 = new Point(6, -4);
+      assert.approximately(point1.findDistanceTo(point2), 9, 0.5);
+    });
+    it("should give the distance when one point1 is origin", function() {
+      const point1 = new Point(1, 1);
+      const point2 = new Point(0, 0);
+      assert.approximately(point1.findDistanceTo(point2), 1, 0.5);
+    });
+    it("should give NaN when the other point is not the instance of the point class", function() {
+      const point1 = new Point(1, 1);
+      const point2 = { x: 2, y: 4 };
+      assert.isNaN(point1.findDistanceTo(point2));
+    });
+  });
 });
