@@ -12,14 +12,19 @@ describe("Circle", function() {
   });
 
   describe("isEqualTo", function() {
-    it("should give true if both circles are similar", function() {
+    it("should give true if both circle's radius and center are same", function() {
       const circle = new Circle({ x: 1, y: 2 }, 5);
       const other = new Circle({ x: 1, y: 2 }, 5);
       assert.isTrue(circle.isEqualTo(other));
     });
-    it("should give false if both circles are not similar", function() {
+    it("should give false if the radius are not same", function() {
       const circle = new Circle({ x: 1, y: 2 }, 3);
       const other = new Circle({ x: 1, y: 2 }, 2);
+      assert.isFalse(circle.isEqualTo(other));
+    });
+    it("should give false if the center's are not same", function() {
+      const circle = new Circle({ x: 1, y: 3 }, 3);
+      const other = new Circle({ x: 1, y: 2 }, 3);
       assert.isFalse(circle.isEqualTo(other));
     });
     it("should give false if both instances are not same", function() {

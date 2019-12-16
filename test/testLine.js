@@ -133,11 +133,11 @@ describe("Line", function() {
       const line = new Line({ x: 2, y: 5 }, { x: 8, y: 10 });
       assert.isNaN(line.findY(11));
     });
-    it("should give first point x when y-coordinates of given point and first end are equal", function() {
+    it("should give first point y when x-coordinates of given point and first end are equal", function() {
       const line = new Line({ x: 5, y: 2 }, { x: 1, y: 5 });
       assert.strictEqual(line.findY(2), 4.25);
     });
-    it("should give second point x when y-coordinates of given point and second end are equal", function() {
+    it("should give second point y when x-coordinates of given point and second end are equal", function() {
       const line = new Line({ x: 5, y: 2 }, { x: 1, y: 5 });
       assert.strictEqual(line.findY(5), 2);
     });
