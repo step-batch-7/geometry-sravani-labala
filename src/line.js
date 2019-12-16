@@ -38,7 +38,10 @@ class Line {
 
   isEqualTo(other) {
     if (!(other instanceof Line)) return false;
-    return this.endA.isEqualTo(other.endA) && this.endB.isEqualTo(other.endB);
+    return (
+      (this.endA.isEqualTo(other.endA) && this.endB.isEqualTo(other.endB)) ||
+      (this.endB.isEqualTo(other.endA) && this.endA.isEqualTo(other.endB))
+    );
   }
 
   get length() {
@@ -94,10 +97,7 @@ class Line {
   }
 
   findPointFromEnd(distance) {
-    const { endA, endB, length } = this;
-    if (distance < 0 || distance > length) return null;
-    const ratioOfDistances = distance / length;
-    return getPoint(ratioOfDistances, endB, endA);
+    return new Line(this.endB, this.endA).findPointFromStart(distance);
   }
 }
 
