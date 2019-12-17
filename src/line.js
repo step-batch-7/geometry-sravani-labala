@@ -20,12 +20,6 @@ const areCollinear = function(pointA, pointB, pointC) {
   return x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2) == 0;
 };
 
-const getPoint = function(ratio, point1, point2) {
-  const xCoordinate = (1 - ratio) * point1.x + ratio * point2.x;
-  const yCoordinate = (1 - ratio) * point1.y + ratio * point2.y;
-  return new Point(xCoordinate, yCoordinate);
-};
-
 class Line {
   constructor(endA, endB) {
     this.endA = new Point(endA.x, endA.y);
@@ -92,8 +86,10 @@ class Line {
   findPointFromStart(distance) {
     const { endA, endB, length } = this;
     if (distance < 0 || distance > length) return null;
-    const ratioOfDistances = distance / length;
-    return getPoint(ratioOfDistances, endA, endB);
+    const ratio = distance / length;
+    const xCoordinate = (1 - ratio) * endA.x + ratio * endB.x;
+    const yCoordinate = (1 - ratio) * endA.y + ratio * endB.y;
+    return new Point(xCoordinate, yCoordinate);
   }
 
   findPointFromEnd(distance) {
