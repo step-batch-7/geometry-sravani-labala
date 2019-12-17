@@ -4,26 +4,25 @@ const Point = require("./point");
 const Line = require("./line");
 class Rectangle {
   constructor(vertexA, vertexC) {
-    this.vertexA = new Point(vertexA.x, vertexA.y);
-    this.vertexB = new Point(vertexA.x, vertexC.y);
-    this.vertexC = new Point(vertexC.x, vertexC.y);
-    this.vertexD = new Point(vertexC.x, vertexA.y);
     this.diagonal = new Line(vertexA, vertexC);
   }
 
   toString() {
-    return `[Rectangle (${this.vertexA.x},${this.vertexA.y}) to (${this.vertexC.x},${this.vertexC.y})]`;
+    const { endA, endB } = this.diagonal;
+    return `[Rectangle (${endA.x},${endA.y}) to (${endB.x},${endB.y})]`;
   }
 
   get area() {
-    const length = this.diagonal.endA.x - this.diagonal.endB.x;
-    const breadth = this.diagonal.endA.y - this.diagonal.endB.y;
+    const { endA, endB } = this.diagonal;
+    const length = endA.x - endB.x;
+    const breadth = endA.y - endB.y;
     return Math.abs(length * breadth);
   }
 
   get perimeter() {
-    const length = this.diagonal.endB.x - this.diagonal.endA.x;
-    const breadth = this.diagonal.endB.y - this.diagonal.endA.y;
+    const { endA, endB } = this.diagonal;
+    const length = endB.x - endA.x;
+    const breadth = endB.y - endA.y;
     return Math.abs(2 * (length + breadth));
   }
 
