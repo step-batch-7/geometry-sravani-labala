@@ -50,6 +50,14 @@ class Rectangle {
     const isYInRange = isInRange([pointA.y, pointC.y], other.y);
     return (areXsEqual && isYInRange) || (areYsEqual && isXInRange);
   }
+
+  covers(other) {
+    if (!(other instanceof Point)) return false;
+    const { pointA, pointC } = this;
+    const isXInRange = isInRange([pointA.x, pointC.x], other.x);
+    const isYInRange = isInRange([pointA.y, pointC.y], other.y);
+    return !this.hasPoint(other) && isXInRange && isYInRange;
+  }
 }
 
 module.exports = Rectangle;

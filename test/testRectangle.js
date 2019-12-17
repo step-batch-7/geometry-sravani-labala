@@ -52,7 +52,9 @@ describe("Rectangle", function() {
   describe("hasPoint", function() {
     it("should give true if the point is on the rectangle", function() {
       const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
-      const point = new Point(1, 3);
+      let point = new Point(1, 3);
+      assert.isTrue(rectangle.hasPoint(point));
+      point = new Point(2, 4);
       assert.isTrue(rectangle.hasPoint(point));
     });
     it("should give false if the point is not on the rectangle", function() {
@@ -62,8 +64,31 @@ describe("Rectangle", function() {
     });
     it("should give false if the instance is not the point", function() {
       const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
-      const point = new Point(4, 3);
+      const point = { x: 2, y: 2 };
       assert.isFalse(rectangle.hasPoint(point));
+    });
+  });
+
+  describe("covers", function() {
+    it("should give true is the point lies inside the rectangle", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const point = new Point(4, 3);
+      assert.isTrue(rectangle.covers(point));
+    });
+    it("should give false if point is not inside the rectangle", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const point = new Point(7, 7);
+      assert.isFalse(rectangle.covers(point));
+    });
+    it("should give false if point is on the perimeter of the rectangle", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const point = new Point(1, 3);
+      assert.isFalse(rectangle.covers(point));
+    });
+    it("should give false is not the instance of the point class", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const point = { x: 2, y: 3 };
+      assert.isFalse(rectangle.covers(point));
     });
   });
 });
