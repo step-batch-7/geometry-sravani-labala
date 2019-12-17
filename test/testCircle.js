@@ -84,13 +84,15 @@ describe("Circle", function() {
       const circle = new Circle({ x: 0, y: 0 }, 7);
       const center = { x: 1, y: 1 };
       const expected = new Circle({ x: 1, y: 1 }, 7);
-      assert.deepStrictEqual(circle.moveTo(center), expected);
+      const actual = circle.moveTo(center);
+      assert.ok(actual.isEqualTo(expected));
     });
     it("should create a new circle of the negative dimensions as the center", function() {
       const circle = new Circle({ x: 0, y: 0 }, 7);
       const center = { x: -1, y: -1 };
       const expected = new Circle({ x: -1, y: -1 }, 7);
-      assert.deepStrictEqual(circle.moveTo(center), expected);
+      const actual = circle.moveTo(center);
+      assert.ok(actual.isEqualTo(expected));
     });
   });
 
@@ -103,6 +105,16 @@ describe("Circle", function() {
     it("should give false if point is not inside the circle", function() {
       const circle = new Circle({ x: 0, y: 0 }, 7);
       const point = new Point(7, 7);
+      assert.isFalse(circle.covers(point));
+    });
+    it("should give true if point is the center the circle", function() {
+      const circle = new Circle({ x: 0, y: 0 }, 7);
+      const point = new Point(0, 0);
+      assert.isTrue(circle.covers(point));
+    });
+    it("should give false if point is on the circumference of the circle", function() {
+      const circle = new Circle({ x: 0, y: 0 }, 7);
+      const point = new Point(0, 7);
       assert.isFalse(circle.covers(point));
     });
     it("should give point is not the instance of the point class", function() {
