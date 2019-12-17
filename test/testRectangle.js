@@ -22,4 +22,12 @@ describe("Rectangle", function() {
       assert.strictEqual(rectangle.perimeter, 14);
     });
   });
+
+  describe("isEqualTo", function() {
+    it("should give true if both rectangles have equal diagonal", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const other = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      assert.isTrue(rectangle.isEqualTo(other));
+    });
+  });
 });
