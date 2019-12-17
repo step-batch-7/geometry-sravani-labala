@@ -1,15 +1,20 @@
 "use strict";
 
 const Point = require("./point");
-
+const Line = require("./line");
 class Rectangle {
-  constructor(endA, endB) {
-    this.endA = new Point(endA.x, endA.y);
-    this.endB = new Point(endB.x, endB.y);
+  constructor(pointA, pointC) {
+    this.diagonalA = new Line(pointA, pointC);
   }
 
   toString() {
-    return `[Rectangle (${this.endA.x},${this.endA.y}) to (${this.endB.x},${this.endB.y})]`;
+    return `[Rectangle (${this.diagonalA.endA.x},${this.diagonalA.endA.y}) to (${this.diagonalA.endB.x},${this.diagonalA.endB.y})]`;
+  }
+
+  get area() {
+    const length = this.diagonalA.endA.x - this.diagonalA.endB.x;
+    const breadth = this.diagonalA.endA.y - this.diagonalA.endB.y;
+    return length * breadth;
   }
 }
 
