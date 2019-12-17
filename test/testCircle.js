@@ -67,7 +67,7 @@ describe("Circle", function() {
       const point = new Point(0, 7);
       assert.isTrue(circle.hasPoint(point));
     });
-    it("should give false if the point is present in the circumference", function() {
+    it("should give false if the point is not present in the circumference", function() {
       const circle = new Circle({ x: 3, y: 3 }, 7);
       const point = new Point(3, 3);
       assert.isFalse(circle.hasPoint(point));
@@ -76,6 +76,15 @@ describe("Circle", function() {
       const circle = new Circle({ x: 0, y: 0 }, 7);
       const point = { x: 0, y: 7 };
       assert.isFalse(circle.hasPoint(point));
+    });
+  });
+
+  describe("moveTo", function() {
+    it("should create a new circle of the same dimensions at the given center", function() {
+      const circle = new Circle({ x: 0, y: 0 }, 7);
+      const center = { x: 1, y: 1 };
+      const expected = new Circle({ x: 1, y: 1 }, 7);
+      assert.deepStrictEqual(circle.moveTo(center), expected);
     });
   });
 });

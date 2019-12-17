@@ -75,6 +75,11 @@ describe("point", function() {
       const point2 = new Point(0, 0);
       assert.approximately(point1.findDistanceTo(point2), 1, 0.5);
     });
+    it("should give the distance as 0 when both the points are equal", () => {
+      const point1 = new Point(1, 2);
+      const point2 = new Point(1, 2);
+      assert.strictEqual(point1.findDistanceTo(point2), 0);
+    });
     it("should give NaN when the other point is not the instance of the point class", function() {
       const point1 = new Point(1, 1);
       const point2 = { x: 2, y: 4 };

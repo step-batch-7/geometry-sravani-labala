@@ -49,7 +49,7 @@ class Line {
   }
 
   isParallelTo(other) {
-    if (!(other instanceof Line) || this === other) return false;
+    if (!(other instanceof Line)) return false;
     if (areCollinear(this.endA, this.endB, other.endA)) return false;
     return this.slope === other.slope;
   }
