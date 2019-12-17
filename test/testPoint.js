@@ -5,7 +5,7 @@ const Point = require("./../src/point");
 const Line = require("./../src/line");
 const Circle = require("./../src/circle");
 
-describe("class", function() {
+describe("point", function() {
   describe("toString", function() {
     it("should give string representation of the point", function() {
       const point = new Point(2, 3);
