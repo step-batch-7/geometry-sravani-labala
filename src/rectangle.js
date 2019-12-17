@@ -7,6 +7,12 @@ const isInRange = function(range, value) {
   return lowerLimit <= value && higherLimit >= value;
 };
 
+const getLengthAndBreadth = function(pointA, pointC) {
+  const length = Math.abs(pointA.x - pointC.x);
+  const breadth = Math.abs(pointA.y - pointC.y);
+  return { length, breadth };
+};
+
 class Rectangle {
   constructor(vertexA, vertexC) {
     this.pointA = new Point(vertexA.x, vertexA.y);
@@ -18,16 +24,12 @@ class Rectangle {
   }
 
   get area() {
-    const { pointC, pointA } = this;
-    const length = Math.abs(pointA.x - pointC.x);
-    const breadth = Math.abs(pointA.y - pointC.y);
+    const { length, breadth } = getLengthAndBreadth(this.pointA, this.pointC);
     return length * breadth;
   }
 
   get perimeter() {
-    const { pointC, pointA } = this;
-    const length = Math.abs(pointA.x - pointC.x);
-    const breadth = Math.abs(pointA.y - pointC.y);
+    const { length, breadth } = getLengthAndBreadth(this.pointA, this.pointC);
     return 2 * (length + breadth);
   }
 
