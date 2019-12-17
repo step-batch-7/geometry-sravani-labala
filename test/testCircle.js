@@ -93,4 +93,22 @@ describe("Circle", function() {
       assert.deepStrictEqual(circle.moveTo(center), expected);
     });
   });
+
+  describe("covers", function() {
+    it("should give true if point is inside the circle", function() {
+      const circle = new Circle({ x: 0, y: 0 }, 7);
+      const point = new Point(2, 3);
+      assert.isTrue(circle.covers(point));
+    });
+    it("should give false if point is not inside the circle", function() {
+      const circle = new Circle({ x: 0, y: 0 }, 7);
+      const point = new Point(7, 7);
+      assert.isFalse(circle.covers(point));
+    });
+    it("should give point is not the instance of the point class", function() {
+      const circle = new Circle({ x: 0, y: 0 }, 7);
+      const point = { x: 2, y: 3 };
+      assert.isFalse(circle.covers(point));
+    });
+  });
 });
