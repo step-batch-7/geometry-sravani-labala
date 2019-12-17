@@ -80,10 +80,16 @@ describe("Circle", function() {
   });
 
   describe("moveTo", function() {
-    it("should create a new circle of the same dimensions at the given center", function() {
+    it("should create a new circle of the positive dimensions as the center", function() {
       const circle = new Circle({ x: 0, y: 0 }, 7);
       const center = { x: 1, y: 1 };
       const expected = new Circle({ x: 1, y: 1 }, 7);
+      assert.deepStrictEqual(circle.moveTo(center), expected);
+    });
+    it("should create a new circle of the negative dimensions as the center", function() {
+      const circle = new Circle({ x: 0, y: 0 }, 7);
+      const center = { x: -1, y: -1 };
+      const expected = new Circle({ x: -1, y: -1 }, 7);
       assert.deepStrictEqual(circle.moveTo(center), expected);
     });
   });
