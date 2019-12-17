@@ -117,7 +117,7 @@ describe("Circle", function() {
       const point = new Point(0, 7);
       assert.isFalse(circle.covers(point));
     });
-    it("should give point is not the instance of the point class", function() {
+    it("should give false is not the instance of the point class", function() {
       const circle = new Circle({ x: 0, y: 0 }, 7);
       const point = { x: 2, y: 3 };
       assert.isFalse(circle.covers(point));
