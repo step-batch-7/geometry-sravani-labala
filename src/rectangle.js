@@ -1,7 +1,12 @@
 "use strict";
 
 const Point = require("./point");
-const Line = require("./line");
+
+const isInRange = function(range, value) {
+  const [lowerLimit, higherLimit] = [Math.min(...range), Math.max(...range)];
+  return lowerLimit <= value && higherLimit >= value;
+};
+
 class Rectangle {
   constructor(vertexA, vertexC) {
     this.pointA = new Point(vertexA.x, vertexA.y);
@@ -34,6 +39,16 @@ class Rectangle {
       (pointA.isEqualTo(p1) && pointC.isEqualTo(p2)) ||
       (pointC.isEqualTo(p1) && pointA.isEqualTo(p2))
     );
+  }
+
+  hasPoint(other) {
+    if (!(other instanceof Point)) return false;
+    const { pointA, pointC } = this;
+    const areXsEqual = other.x == pointA.x || other.x == pointC.x;
+    const areYsEqual = other.y == pointA.y || other.y == pointC.y;
+    const isXInRange = isInRange([pointA.x, pointC.x], other.x);
+    const isYInRange = isInRange([pointA.y, pointC.y], other.y);
+    return (areXsEqual && isYInRange) || (areYsEqual && isXInRange);
   }
 }
 
