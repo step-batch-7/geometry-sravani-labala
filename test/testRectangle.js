@@ -1,3 +1,5 @@
+"use strict";
+
 const assert = require("chai").assert;
 const Rectangle = require("./../src/rectangle");
 
@@ -28,6 +30,16 @@ describe("Rectangle", function() {
       const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
       const other = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
       assert.isTrue(rectangle.isEqualTo(other));
+    });
+    it("should give false if given rectangles doesn't have equal diagonal", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const other = new Rectangle({ x: 6, y: 6 }, { x: 5, y: 4 });
+      assert.isFalse(rectangle.isEqualTo(other));
+    });
+    it("should give false if the rectangle doesn't belong to the rectangle class", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const other = { endA: { x: 1, y: 1 }, endB: { x: 5, y: 4 } };
+      assert.isFalse(rectangle.isEqualTo(other));
     });
   });
 });
