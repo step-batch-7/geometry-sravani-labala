@@ -8,9 +8,9 @@ const getMidPoint = function(endA, endB) {
   return new Point(midOfX, midOfY);
 };
 
-const isOutOfRange = function(range, value) {
-  const [lowerLimit, higherLimit] = range.sort();
-  return lowerLimit < value && value > higherLimit;
+const isInRange = function(range, value) {
+  const [lowerLimit, higherLimit] = [Math.min(...range), Math.max(...range)];
+  return lowerLimit <= value && higherLimit >= value;
 };
 
 const areCollinear = function(pointA, pointB, pointC) {
@@ -62,7 +62,7 @@ class Line {
 
   findY(x) {
     const { endA, endB, slope } = this;
-    if (isOutOfRange([endA.x, endB.x], x)) return NaN;
+    if (!isInRange([endA.x, endB.x], x)) return NaN;
     if (endA.x == endB.x) return endA.y;
     const dx = x - endA.x;
     return slope * dx + endA.y;
@@ -70,7 +70,7 @@ class Line {
 
   findX(y) {
     const { endA, endB, slope } = this;
-    if (isOutOfRange([endA.y, endB.y], y)) return NaN;
+    if (!isInRange([endA.y, endB.y], y)) return NaN;
     if (endA.y == endB.y) return endA.x;
     const dy = y - endA.y;
     return endA.x + dy / slope;
