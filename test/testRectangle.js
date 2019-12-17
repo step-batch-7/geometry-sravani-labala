@@ -15,4 +15,11 @@ describe("Rectangle", function() {
       assert.strictEqual(rectangle.area, 12);
     });
   });
+
+  describe("perimeter", function() {
+    it("should give the perimeter of the rectangle when the diagonal coordinates are given", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      assert.strictEqual(rectangle.perimeter, 14);
+    });
+  });
 });
