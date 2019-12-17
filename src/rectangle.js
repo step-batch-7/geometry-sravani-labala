@@ -4,31 +4,36 @@ const Point = require("./point");
 const Line = require("./line");
 class Rectangle {
   constructor(vertexA, vertexC) {
-    this.diagonal = new Line(vertexA, vertexC);
+    this.pointA = new Point(vertexA.x, vertexA.y);
+    this.pointC = new Point(vertexC.x, vertexC.y);
   }
 
   toString() {
-    const { endA, endB } = this.diagonal;
-    return `[Rectangle (${endA.x},${endA.y}) to (${endB.x},${endB.y})]`;
+    return `[Rectangle (${this.pointA.x},${this.pointA.y}) to (${this.pointC.x},${this.pointC.y})]`;
   }
 
   get area() {
-    const { endA, endB } = this.diagonal;
-    const length = endA.x - endB.x;
-    const breadth = endA.y - endB.y;
-    return Math.abs(length * breadth);
+    const { pointC, pointA } = this;
+    const length = Math.abs(pointA.x - pointC.x);
+    const breadth = Math.abs(pointA.y - pointC.y);
+    return length * breadth;
   }
 
   get perimeter() {
-    const { endA, endB } = this.diagonal;
-    const length = endB.x - endA.x;
-    const breadth = endB.y - endA.y;
-    return Math.abs(2 * (length + breadth));
+    const { pointC, pointA } = this;
+    const length = Math.abs(pointA.x - pointC.x);
+    const breadth = Math.abs(pointA.y - pointC.y);
+    return 2 * (length + breadth);
   }
 
   isEqualTo(other) {
     if (!(other instanceof Rectangle)) return false;
-    return this.diagonal.isEqualTo(other.diagonal);
+    const { pointA, pointC } = this;
+    const [p1, p2] = [other.pointA, other.pointC];
+    return (
+      (pointA.isEqualTo(p1) && pointC.isEqualTo(p2)) ||
+      (pointC.isEqualTo(p1) && pointA.isEqualTo(p2))
+    );
   }
 }
 

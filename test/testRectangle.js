@@ -31,6 +31,11 @@ describe("Rectangle", function() {
       const other = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
       assert.isTrue(rectangle.isEqualTo(other));
     });
+    it("should give true if both rectangles have equal diagonal in reverse also", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const other = new Rectangle({ x: 5, y: 4 }, { x: 1, y: 1 });
+      assert.isTrue(rectangle.isEqualTo(other));
+    });
     it("should give false if given rectangles doesn't have equal diagonal", function() {
       const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
       const other = new Rectangle({ x: 6, y: 6 }, { x: 5, y: 4 });

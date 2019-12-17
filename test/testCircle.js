@@ -112,10 +112,10 @@ describe("Circle", function() {
       const point = new Point(0, 0);
       assert.isTrue(circle.covers(point));
     });
-    it("should give false if point is on the circumference of the circle", function() {
+    it("should give true if point is on the circumference of the circle", function() {
       const circle = new Circle({ x: 0, y: 0 }, 7);
       const point = new Point(0, 7);
-      assert.isFalse(circle.covers(point));
+      assert.isTrue(circle.covers(point));
     });
     it("should give false is not the instance of the point class", function() {
       const circle = new Circle({ x: 0, y: 0 }, 7);
