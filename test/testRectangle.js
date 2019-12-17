@@ -47,6 +47,11 @@ describe("Rectangle", function() {
       const other = { endA: { x: 1, y: 1 }, endB: { x: 5, y: 4 } };
       assert.isFalse(rectangle.isEqualTo(other));
     });
+    it("should give true if the rectangles are same but diagonals are given in opposite direction", function() {
+      const rectangle1 = new Rectangle({ x: 1, y: 1 }, { x: 4, y: 5 });
+      const other = new Rectangle({ x: 4, y: 5 }, { x: 1, y: 1 });
+      assert.isTrue(rectangle1.isEqualTo(other));
+    });
   });
 
   describe("hasPoint", function() {

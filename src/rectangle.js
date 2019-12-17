@@ -35,9 +35,13 @@ class Rectangle {
     if (!(other instanceof Rectangle)) return false;
     const { pointA, pointC } = this;
     const [p1, p2] = [other.pointA, other.pointC];
+    const pointB = new Point(pointA.x, pointC.y);
+    const pointD = new Point(pointC.x, pointA.y);
     return (
       (pointA.isEqualTo(p1) && pointC.isEqualTo(p2)) ||
-      (pointC.isEqualTo(p1) && pointA.isEqualTo(p2))
+      (pointC.isEqualTo(p1) && pointA.isEqualTo(p2)) ||
+      (pointB.isEqualTo(p1) && pointD.isEqualTo(p2)) ||
+      (pointD.isEqualTo(p1) && pointB.isEqualTo(p2))
     );
   }
 
