@@ -49,7 +49,11 @@ class Rectangle {
     const areYsEqual = other.y == vertexA.y || other.y == vertexC.y;
     const isXInRange = isInRange([vertexA.x, vertexC.x], other.x);
     const isYInRange = isInRange([vertexA.y, vertexC.y], other.y);
-    return (areXsEqual && isYInRange) || (areYsEqual && isXInRange);
+    return (
+      (areXsEqual && isYInRange) ||
+      (areYsEqual && isXInRange) ||
+      (areXsEqual && areYsEqual)
+    );
   }
 
   covers(other) {

@@ -62,6 +62,13 @@ describe("Rectangle", function() {
       point = new Point(2, 4);
       assert.isTrue(rectangle.hasPoint(point));
     });
+    it("should give true if the point is on the vertex of the rectangle", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      let point = new Point(1, 1);
+      assert.isTrue(rectangle.hasPoint(point));
+      point = new Point(1, 4);
+      assert.isTrue(rectangle.hasPoint(point));
+    });
     it("should give false if the point is not on the rectangle", function() {
       const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
       const point = new Point(4, 3);
