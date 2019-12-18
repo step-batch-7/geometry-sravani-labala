@@ -8,43 +8,54 @@ const isInRange = function(range, value) {
   return lowerLimit <= value && higherLimit >= value;
 };
 
+const getLengthAndBreadth = function(endA, endB) {
+  const length = Math.abs(endA.x - endB.x);
+  const breadth = Math.abs(endA.y - endB.y);
+  return { length, breadth };
+};
+
 class Rectangle {
   constructor(vertexA, vertexC) {
-    this.vertexA = new Point(vertexA.x, vertexA.y);
-    this.vertexC = new Point(vertexC.x, vertexC.y);
-    this.vertexB = new Point(vertexC.x, vertexA.y);
-    this.vertexD = new Point(vertexA.x, vertexC.y);
+    this.diagonal = new Line(vertexA, vertexC);
   }
 
   toString() {
-    return `[Rectangle (${this.vertexA.x},${this.vertexA.y}) to (${this.vertexC.x},${this.vertexC.y})]`;
+    const { endA, endB } = this.diagonal;
+    return `[Rectangle (${endA.x},${endA.y}) to (${endB.x},${endB.y})]`;
   }
 
   get area() {
-    const length = this.vertexA.findDistanceTo(this.vertexB);
-    const breadth = this.vertexB.findDistanceTo(this.vertexC);
+    const { length, breadth } = getLengthAndBreadth(
+      this.diagonal.endA,
+      this.diagonal.endB
+    );
     return length * breadth;
   }
 
   get perimeter() {
-    const length = this.vertexA.findDistanceTo(this.vertexB);
-    const breadth = this.vertexB.findDistanceTo(this.vertexC);
+    const { length, breadth } = getLengthAndBreadth(
+      this.diagonal.endA,
+      this.diagonal.endB
+    );
     return 2 * (length + breadth);
   }
 
   isEqualTo(other) {
     if (!(other instanceof Rectangle)) return false;
-    const diagonalA = new Line(this.vertexA, this.vertexC);
-    const diagonalB = new Line(this.vertexB, this.vertexD);
-    const otherDiagonal = new Line(other.vertexA, other.vertexC);
+    const { endA, endB } = this.diagonal;
+    const diagonal2 = new Line(
+      { x: endB.x, y: endA.y },
+      { x: endA.x, y: endB.y }
+    );
     return (
-      diagonalA.isEqualTo(otherDiagonal) || diagonalB.isEqualTo(otherDiagonal)
+      this.diagonal.isEqualTo(other.diagonal) ||
+      diagonal2.isEqualTo(other.diagonal)
     );
   }
 
   hasPoint(other) {
     if (!(other instanceof Point)) return false;
-    const { vertexA, vertexC } = this;
+    const [vertexA, vertexC] = [this.diagonal.endA, this.diagonal.endB];
     const areXsEqual = other.x == vertexA.x || other.x == vertexC.x;
     const areYsEqual = other.y == vertexA.y || other.y == vertexC.y;
     const isXInRange = isInRange([vertexA.x, vertexC.x], other.x);
@@ -54,7 +65,7 @@ class Rectangle {
 
   covers(other) {
     if (!(other instanceof Point)) return false;
-    const { vertexA, vertexC } = this;
+    const [vertexA, vertexC] = [this.diagonal.endA, this.diagonal.endB];
     const isXInRange = isInRange([vertexA.x, vertexC.x], other.x);
     const isYInRange = isInRange([vertexA.y, vertexC.y], other.y);
     return isYInRange && isXInRange && !this.hasPoint(other);
