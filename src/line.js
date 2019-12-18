@@ -89,6 +89,9 @@ class Line {
     const ratio = distance / length;
     const xCoordinate = (1 - ratio) * endA.x + ratio * endB.x;
     const yCoordinate = (1 - ratio) * endA.y + ratio * endB.y;
+    if (isNaN(xCoordinate) || isNaN(yCoordinate)) {
+      return null;
+    }
     return new Point(xCoordinate, yCoordinate);
   }
 
