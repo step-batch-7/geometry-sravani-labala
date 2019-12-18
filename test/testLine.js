@@ -123,6 +123,16 @@ describe("Line", function() {
       const lineB = new Line({ x: 7, y: 2 }, { x: 12, y: 2 });
       assert.isFalse(lineA.isParallelTo(lineB));
     });
+    it("Should give true if line is parallel to y-axis", () => {
+      const line1 = new Line({ x: 0, y: 0 }, { x: 0, y: 1 });
+      const line2 = new Line({ x: 1, y: 0 }, { x: 1, y: -2 });
+      assert.isTrue(line1.isParallelTo(line2));
+    });
+    it("Should give true if line is parallel to x-axis", () => {
+      const line1 = new Line({ x: 0, y: 0 }, { x: 1, y: 0 });
+      const line2 = new Line({ x: 0, y: 1 }, { x: -2, y: 1 });
+      assert.isTrue(line1.isParallelTo(line2));
+    });
   });
 
   describe("findY", function() {

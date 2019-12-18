@@ -51,6 +51,8 @@ class Line {
   isParallelTo(other) {
     if (!(other instanceof Line)) return false;
     if (areCollinear(this.endA, this.endB, other.endA)) return false;
+    if (Math.abs(this.slope) == Infinity && Math.abs(other.slope) == Infinity)
+      return true;
     return this.slope === other.slope;
   }
 
