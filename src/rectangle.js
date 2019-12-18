@@ -5,7 +5,7 @@ const Line = require("./line");
 
 const isInRange = function(range, value) {
   const [lowerLimit, higherLimit] = [Math.min(...range), Math.max(...range)];
-  return lowerLimit < value && higherLimit > value;
+  return lowerLimit <= value && higherLimit >= value;
 };
 
 class Rectangle {
@@ -49,11 +49,7 @@ class Rectangle {
     const areYsEqual = other.y == vertexA.y || other.y == vertexC.y;
     const isXInRange = isInRange([vertexA.x, vertexC.x], other.x);
     const isYInRange = isInRange([vertexA.y, vertexC.y], other.y);
-    return (
-      (areXsEqual && isYInRange) ||
-      (areYsEqual && isXInRange) ||
-      (areXsEqual && areYsEqual)
-    );
+    return (areXsEqual && isYInRange) || (areYsEqual && isXInRange);
   }
 
   covers(other) {
@@ -61,7 +57,7 @@ class Rectangle {
     const { vertexA, vertexC } = this;
     const isXInRange = isInRange([vertexA.x, vertexC.x], other.x);
     const isYInRange = isInRange([vertexA.y, vertexC.y], other.y);
-    return isYInRange && isXInRange;
+    return isYInRange && isXInRange && !this.hasPoint(other);
   }
 }
 
